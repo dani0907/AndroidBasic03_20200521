@@ -63,5 +63,6 @@ public class MainActivity extends BaseActivity {
                 binding.userNickNameTxt.setText(nick);
             }
         }
+
     }
 }
