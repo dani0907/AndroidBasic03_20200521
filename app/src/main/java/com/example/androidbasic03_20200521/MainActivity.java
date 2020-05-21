@@ -17,6 +17,7 @@ public class MainActivity extends BaseActivity {
 
     final int REQ_FOR_PHONE_NUM = 1002;
     final int REQ_FOR_NICKNAME = 1001;
+    final int REQ_FOR_EMAIL = 1003;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+        binding.editEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext,EditUserEmailActivity.class);
+                startActivityForResult(myIntent,REQ_FOR_EMAIL);
+            }
+        });
+
         binding.editPhoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +83,18 @@ public class MainActivity extends BaseActivity {
             }
             else {
                 Toast.makeText(mContext, "전화번호 변경을 취소했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if (requestCode == REQ_FOR_EMAIL){
+            if(resultCode == RESULT_OK){
+                if(data !=null){
+                    String email = data.getStringExtra("email");
+
+                    binding.userEmailTxt.setText(email);
+                }
+            }
+            else{
+                Toast.makeText(mContext, "이메일 변경을 취소했습니다.", Toast.LENGTH_SHORT).show();
             }
         }
 
